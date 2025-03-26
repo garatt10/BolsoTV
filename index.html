@@ -8,28 +8,56 @@
     <style>
         body { text-align: center; font-family: Arial, sans-serif; background-color: #000; color: #fff; }
         video { width: 100%; max-width: 800px; margin-top: 20px; }
+        button { padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
     <h1>Reproduciendo Video en Vivo</h1>
-    <video id="video" controls autoplay playsinline></video>
+    <video id="video" controls autoplay playsinline muted></video>
+    <button id="playButton" style="display: none;">Reproducir</button>
+    <button id="syncButton">Sincronizar en Vivo</button>
     
     <script>
         var video = document.getElementById('video');
-        var videoSrc = "https://51a.pricesaskeloadsc.com/global/vtvplus/index.m3u8?token=90a04caee3ac09d26ce6f75e5fa0b2d979b97673-6e-1743015757-1742983357";
+        var playButton = document.getElementById('playButton');
+        var syncButton = document.getElementById('syncButton');
+        var videoSrc = "https://14c5.pricesaskeloadsc.com/global/disney2/index.m3u8?token=072338f05f000e5ae2ffe0b59b9b804a9a8d4faa-87-1743039092-1743006692";
         
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource(videoSrc);
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+        function startVideo() {
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(videoSrc);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.muted = false;
+                    video.play();
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = videoSrc;
+                video.muted = false;
                 video.play();
+            } else {
+                alert("Tu navegador no soporta la reproducción de videos HLS.");
+            }
+        }
+
+        // Botón para sincronizar al momento en vivo
+        syncButton.addEventListener("click", function() {
+            if (video.readyState > 0) {
+                video.currentTime = video.seekable.end(0); // Ir al punto en vivo
+                video.play();
+            }
+        });
+
+        // Detectar si el usuario está en móvil y mostrar botón manual de reproducción
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            playButton.style.display = "block";
+            playButton.addEventListener("click", function() {
+                startVideo();
+                playButton.style.display = "none";
             });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = videoSrc;
-            video.play();
         } else {
-            alert("Tu navegador no soporta la reproducción de videos HLS.");
+            startVideo();
         }
     </script>
 </body>
