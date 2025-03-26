@@ -3,19 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Bienvenido a BolsoTV</title>
+    <title>BolsoTV</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; background-color: #000; color: #fff; }
-        video { width: 100%; max-width: 800px; margin-top: 20px; }
-        button { padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer; }
+        body { 
+            text-align: center; 
+            font-family: Arial, sans-serif; 
+            background-color: #002f6c; 
+            color: #fff; 
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #d50032;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        video {
+            width: 100%; 
+            max-width: 800px; 
+            margin-top: 20px; 
+            border: 5px solid #fff;
+            border-radius: 10px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px; 
+            font-size: 16px; 
+            margin: 10px;
+            cursor: pointer; 
+            border: none;
+            border-radius: 5px;
+            background-color: #d50032;
+            color: white;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #ba0027;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #d50032;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
-    <h1>Reproduciendo Video en Vivo</h1>
+    <header>BolsoTV</header>
+    <h2>Reproduciendo Video en Vivo</h2>
     <video id="video" controls autoplay playsinline muted></video>
-    <button id="playButton" style="display: none;">Reproducir</button>
-    <button id="syncButton">Sincronizar en Vivo</button>
+    <div class="buttons">
+        <button id="playButton" style="display: none;">Reproducir</button>
+        <button id="syncButton">Sincronizar en Vivo</button>
+    </div>
+    <footer>
+        © 2025 BolsoTV - Todos los derechos reservados
+    </footer>
     
     <script>
         var video = document.getElementById('video');
