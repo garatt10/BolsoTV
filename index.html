@@ -1,20 +1,36 @@
-inde<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Partido Uruguay vs Bolivia</title>
-    <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet">
-    <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Reproductor de Video</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; background-color: #000; color: #fff; }
+        video { width: 100%; max-width: 800px; margin-top: 20px; }
+    </style>
 </head>
 <body>
-    <h1>VTV PLUS</h1>
-    <video id="my-video" class="video-js vjs-default-skin" controls autoplay width="800" height="450">
-        <source src="https://51a.pricesaskeloadsc.com/global/vtvplus/index.m3u8?token=90a04caee3ac09d26ce6f75e5fa0b2d979b97673-6e-1743015757-1742983357">
-    </video>
-
+    <h1>Reproduciendo Video en Vivo</h1>
+    <video id="video" controls autoplay playsinline></video>
+    
     <script>
-        var player = videojs('my-video');
+        var video = document.getElementById('video');
+        var videoSrc = "https://51a.pricesaskeloadsc.com/global/vtvplus/index.m3u8?token=90a04caee3ac09d26ce6f75e5fa0b2d979b97673-6e-1743015757-1742983357";
+        
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSrc;
+            video.play();
+        } else {
+            alert("Tu navegador no soporta la reproducción de videos HLS.");
+        }
     </script>
 </body>
 </html>
