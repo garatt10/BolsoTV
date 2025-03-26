@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>BolsoTV</title>
+    <title>BolsoTV - Club Nacional de Football</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         body { 
@@ -19,6 +19,17 @@
             padding: 20px;
             font-size: 24px;
             font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            padding: 20px;
         }
         video {
             width: 100%; 
@@ -26,13 +37,14 @@
             margin-top: 20px; 
             border: 5px solid #fff;
             border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
         }
         .buttons {
             margin-top: 20px;
         }
         button {
-            padding: 10px 20px; 
-            font-size: 16px; 
+            padding: 12px 25px; 
+            font-size: 18px; 
             margin: 10px;
             cursor: pointer; 
             border: none;
@@ -40,28 +52,36 @@
             background-color: #d50032;
             color: white;
             font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
         }
         button:hover {
             background-color: #ba0027;
+            transform: scale(1.05);
         }
         footer {
             margin-top: 30px;
-            padding: 10px;
+            padding: 15px;
             background-color: #d50032;
-            font-size: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 <body>
-    <header>BolsoTV</header>
-    <h2>Reproduciendo Video en Vivo</h2>
-    <video id="video" controls autoplay playsinline muted></video>
-    <div class="buttons">
-        <button id="playButton" style="display: none;">Reproducir</button>
-        <button id="syncButton">Sincronizar en Vivo</button>
+    <header>BolsoTV - Club Nacional de Football</header>
+    <div class="container">
+        <h2>Reproduciendo Video en Vivo</h2>
+        <video id="video" controls autoplay playsinline muted></video>
+        <div class="buttons">
+            <button id="playButton" style="display: none;">Reproducir</button>
+            <button id="syncButton">Sincronizar en Vivo</button>
+        </div>
     </div>
     <footer>
-        © 2025 BolsoTV - Todos los derechos reservados
+        © 2025 Club Nacional de Football - Todos los derechos reservados
     </footer>
     
     <script>
